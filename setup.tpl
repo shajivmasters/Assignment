@@ -53,7 +53,7 @@ dbrootpass=`/home/centos/scripts/generate_randpass.py`
 dbtoweruserpass=`/home/centos/scripts/generate_randpass.py`
 echo "Old password : $pass" >>  /var/log/aws_install.log 2>&1
 echo "Root password : $dbrootpass" >>  /var/log/aws_install.log 2>&1
-echo "Old password : $dbtoweruserpass" >>  /var/log/aws_install.log 2>&1
+echo "Toweruser password : $dbtoweruserpass" >>  /var/log/aws_install.log 2>&1
 
 # Create a JSON object with password information
 json_data='{"dbrootpass": "'"$dbrootpass"'", "dbtoweruserpass": "'"$dbtoweruserpass"'"}'
