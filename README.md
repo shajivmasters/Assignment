@@ -6,6 +6,7 @@ This will create an EC2 Instance in AWS and configure the MYSQL server with a su
 * [Technologies Used](#technologies-used)
 * [General Infromation](#general-information)
 * [Test Cases](#test-cases)
+* [Script Information][#script-information]
 
 ### Technologies-used
 
@@ -36,8 +37,8 @@ This will create an EC2 Instance in AWS and configure the MYSQL server with a su
 	         * Install mysql-community-server
 	         * Start the mysql service and capture the data that it is listening on alll the ports 
 	         * Change the password to a known password for root
-	         * Setup an account toweruser with full privilege 
-	         * Setup an account towerreadonly with readonly acces . I am using in the FASTAPI to query as it is PoC I hard coded . We could use the vault solution or crypt it in script as well . You can check that using the “SHOW GRANTS FOR 'towerro'@'%';” 
+	         * Generated a random passwords to reset the new passowrd to root and toweruser
+	         * Setup an account toweruser with full privilege
 	         * Application setup like chaning permission and starting/bootstrapping the FAST API
 
     9.	ssh -i /Users/monu/.ssh/towerkeypair centos@<publicip reported from terraform apply
@@ -53,28 +54,40 @@ Create a database called 'tower', a table called 'tower' with following data sto
 Field1 | Field2 | Field3
 Current date and time | jlaide | Tower home project for SRE
 
-		There is multiple way you can do this 
-			Ø Using the FASTAPI directly by accessing using http://<PubIP>/swagger  . The same link will give you the usages. This allows you to query and bootstrap the DB . It is a conscious decision not to provide the update capability for the end user . The Update is provided using the /home/centos/scripts/dbmanage.py insert/delete options in the CLI.If you test the http://<PubIP>/getdata it should through the error “DB connection Failed” 
-			Ø Using the script which in turn calling the API to achieve /home/centos/scripts/dbmanage.py create 
+		Below are the option you have to Bootstap the above DB configuration 
+			Ø Using the FASTAPI directly by accessing using http://<PubIP>/swagger.This allows you to query/insert/delete  and also bootstrap the DB.
+			Ø Using the script which in turn calling the API to achieve "/home/centos/scripts/dbmanage.py create". The script is deployed part of the deployment
 			Ø Using a simple Curl POST command curl -X POST http://<PubIP>/configure_mysql
-			Ø Using the FASTAPI directly by accessing using http://<PubIP>/ping. You should get a "Pong" response 
+
 3. Your application/script should be able to get all the data from the table and output the data to the screen
    
 		You can do this with following ways
 			Ø Using the API or curl you can do it "curl -s  http://<PubIP>/getdata" or from the host itself you can run "curl -s http://localhost/getdata | jq "
-			Ø /home/centos/scripts/dbmanage.py query -p <password>
+			Ø /home/centos/scripts/dbmanage.py query -p <password of the toweruser>
 		
 4. Your application/script should be able to change the data in the table and output the new data to the screen 
 
-		Ø /home/centos/scripts/dbmanage.py insert  -p <password> -f2 <username>  data -f3 <comments> [-f1 <datetime> default <currentdatetime> ]
-		As you can see "Fiedl1" set this as optional and if it is not provided it will insert the current date/time 																
+		Ø /home/centos/scripts/dbmanage.py insert  -p <password of the toweruser>> -f2 <username>  data -f3 <comments> [-f1 <datetime> default <currentdatetime> ]
+		As you can see "Fiedl1" set this as optional and if it is not provided it will insert the current date/time 						
 		Ø The primary key here is the feild2 <username> and will update the existing entry if it exist if not insert the provided data	
 		Ø Query the data 
 			Ø Using the API or curl you can do it "curl -s  http://<PubIP>/getdata" or from the host itself you can run "curl -s http://localhost/getdata | jq "
 			Ø /home/centos/scripts/dbmanage.py query -p <password>
    		Ø You can delete the entry using /home/centos/scripts/dbmanage.py delete -p <password> -f2 <username> . Note the "Field2" is the primary key 
 
+
+ ### Script Information
+  FastAPI EndPoint
+ 
+ 	/ping                   ==> Respond with a pong if the API is live.
+	/configure_sql       	==> This will create a Subinterface and Bind the DB to the new interface and configure a template DB. This is just a PoC.
+	/getdata                ==> Query the data in the database and return. It can return "DB connection Failed/Data/Empty Table".
+	/insert                 ==> Insert/Update the data into the DB".
+	/delete                 ==> Delete the record from the DB".
+ ![image](https://github.com/shajivmasters/Assignment/assets/116799274/5c32724e-5d2e-4014-a1b8-e38e2d36fb33)
 dbmanage.py sript options
 
-
  ![image](https://github.com/shajivmasters/Assignmnet/assets/116799274/4b7d9b2d-a035-40b7-a7e0-7400af17a747)
+
+
+
