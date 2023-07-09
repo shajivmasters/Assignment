@@ -76,7 +76,7 @@ Current date and time | jlaide | Tower home project for SRE
    		Ø You can delete the entry using /home/centos/scripts/dbmanage.py delete -p <password> -f2 <username> . Note the "Field2" is the primary key 
 
 
- ### Script Information
+ ## Script Information
   FastAPI EndPoint
  
  	/ping                   ==> Respond with a pong if the API is live.
