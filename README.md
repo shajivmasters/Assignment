@@ -11,6 +11,8 @@ This will create an EC2 Instance in AWS and configure the MYSQL server with a su
 
        1. Terraform : 1.52
        2. Python    : 3.9
+       3. FastAPI   : 0.100.0
+
 
 ## General Information
 1. Setup an AWS server running either CentOS or Rocky Linux.
