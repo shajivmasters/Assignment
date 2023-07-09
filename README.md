@@ -4,9 +4,8 @@ This will create an EC2 Instance in AWS and configure the MYSQL server with a su
 
 ## Table of Contents
 * [Technologies Used](#technologies-used)
-* [General Infromation](#general-information)
-* [Test Cases](#test-cases)
-* [Script Information][#script-information]
+* [Project Infromation](#project-information)
+* [Script Information](#script-information)
 
 ### Technologies-used
 
@@ -15,7 +14,7 @@ This will create an EC2 Instance in AWS and configure the MYSQL server with a su
        3. FastAPI   : 0.100.0
 
 
-## General Information
+## Project Information
 1. Setup an AWS server running either CentOS or Rocky Linux.
 	
 	1. Download terraform
@@ -76,7 +75,7 @@ Current date and time | jlaide | Tower home project for SRE
    		Ø You can delete the entry using /home/centos/scripts/dbmanage.py delete -p <password> -f2 <username> . Note the "Field2" is the primary key 
 
 
- ## Script Information
+ ### Script Information
   FastAPI EndPoint
  
  	/ping                   ==> Respond with a pong if the API is live.
