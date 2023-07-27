@@ -41,7 +41,7 @@ This will create an EC2 Instance in AWS and configure the MYSQL server with a su
 	         * Application setup like chaning permission and starting/bootstrapping the FAST API
 
     9.	ssh -i /Users/monu/.ssh/towerkeypair centos@<publicip reported from terraform apply
-    10.	tail -f / var/log/aws_install.log – This should have the
+    10.	tail -f / var/log/aws_install.log – This should have the installation and setup logs
     11.	ps -ef | grep app | grep -v grep . This will make sure FASTAPI is up and running
     12.	ss -lt | grep mysql -> will be listening on all the interfaces
 
