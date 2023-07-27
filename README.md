@@ -24,7 +24,7 @@ This will create an EC2 Instance in AWS and configure the MYSQL server with a su
 	
 	3.  terraform init if needed
 	4.  terraform plan
-	5.  terraform apply -auto-approve
+	5.  terraform apply -auto-approve [ If fails please update the main.tf file line 87 with just towerkeypair.pub and line 107 with just towerkeypair ( Just remove the "/Users/monu/.ssh/" as it doesn;t exists) 
 	6.  Wait for terraform to complete the Deployment .
 	7.  The above will go ahead and deploy a Centos VM and configure the below . This will output the Public IP of the VM that you can connect and also the Endpoint for the API URL ( Wait for 3 minutes or so before you try accessing as it is  the API configuration still being configured in the backend )
 
